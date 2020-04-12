@@ -20,7 +20,7 @@ namespace EnrollApp.Models
                 new Offer()
                 {
                     Title = "Групповые занятия",
-                    Description = "Зантия в группе из 4-5 учеников одного уровня",
+                    Description = "Занятия в группе из 4-5 учеников одного уровня",
                     Price = 400
                 }
             };
