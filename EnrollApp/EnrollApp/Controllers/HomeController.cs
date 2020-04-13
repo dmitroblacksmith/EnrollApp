@@ -1,37 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using EnrollApp.Models;
+using EnrollApp.ViewModels;
 
 namespace EnrollApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private AppDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(AppDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
-
+        [HttpGet]
         public IActionResult Index()
         {
+            ViewBag.Offers = _context.Offers.ToList();
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult Index(ClientRequestViewModel vm)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                Client client = new Client() { Name = vm.Name, Email = vm.Email, Phone = vm.Phone };
+                ClientRequest clientRequest = new ClientRequest()
+                {
+                    Question = vm.Question,
+                    OfferId = vm.OfferId,
+                    ClientRequestStateId = _context.ClientRequestStates.First(r => r.IsNewRequest == true).Id
+                };
+
+                client.ClientRequests = new List<ClientRequest>() { clientRequest };
+
+                _context.Clients.Add(client);
+                _context.SaveChanges();
+
+                return RedirectToAction("Response");
+            }
+            else
+            {
+                ViewBag.Offers = _context.Offers.ToList();
+                return View(vm);
+            }
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpGet]
+        public IActionResult Response()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }

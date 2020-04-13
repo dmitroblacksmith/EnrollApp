@@ -1,8 +1,324 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model EnrollApp.ViewModels.ClientRequestViewModel
+@{
+    ViewData["Title"] = "EnglishGo";
+    Layout = null;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EnglishGo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+</head>
+<body class="parallax" style="background-image: url('img/5.jpg');" onload="checkModel()">
+    <style>
+        .btn-round {
+            border-radius: 50px;
+        }
+    </style>
+    <div class="d-flex flex-column col-12 justify-content-center">
+        <div class="d-flex justify-content-center align-items-center py-md-2 fixed-top nav-bar-fixed shadow bg-white">
+            <div class="px-md-2">
+                <button id="about-button" type="button" class="btn btn-outline-danger btn-round" onclick="showabout()">О нас</button>
+            </div>
+            <div class="px-md-2">
+                <button type="button" class="btn btn-outline-danger btn-round" onclick="showprices()">Тарифы</button>
+            </div>
+            <div class="px-md-2" style="width: 5%;">
+                <a href="#">
+                    <img src="img/round_logo.png" style="width: 100%;" />
+                </a>
+            </div>
+            <div class="px-md-2">
+                <button type="button" class="btn btn-outline-danger btn-round" onclick="showcontacts()">Контакты</button>
+            </div>
+            <div class="px-md-2">
+                <button type="button" class="btn btn-outline-danger btn-round" onclick="showapplyform()">Запись</button>
+            </div>
+        </div>
+        <div class="landing-content d-flex flex-column pt-6 justify-content-center">
+            <div class="welcome-panel d-flex col-10 offset-1 align-items-center shadowed">
+                <div class="welcome-text d-flex flex-column col-7">
+                    <div class="title d-flex">
+                        <div>ENGLISHGO</div>
+                    </div>
+                    <div class="sutitle1">
+                        Школа английского языка
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-outline-dark btn-round" onclick="showabout()">Подробнее о нас</button>
+                    </div>
+                </div>
+                <div class="welcome-img " style="background-image: url('img/school.svg');">
+                </div>
+            </div>
+
+            <div id="about-panel" class="about-panel d-flex col-10 offset-1 pt-5 flex-column">
+                <div class="title text-center">О нас</div>
+                <div class="about-cards d-flex">
+                    <div class="about-card d-flex shadowed flex-column">
+                        <div class="about-img about-img1" style="background-image: url('img/library.svg');"></div>
+                        <div class="sutitle2 text-center">Собственная программа</div>
+                        <div class="content">Folly words widow one downs few age every seven. If miss part by fact he park just shew. Discovered had get considered projection who favourable. Necessary up knowledge it tolerably. </div>
+                    </div>
+                    <div class="about-card d-flex shadowed flex-column">
+                        <div class="about-img about-img2" style="background-image: url('img/study.svg');"></div>
+                        <div class="sutitle2 text-center">Индивидуальный подход</div>
+                        <div class="content">Folly words widow one downs few age every seven. If miss part by fact he park just shew. Discovered had get considered projection who favourable. Necessary up knowledge it tolerably. </div>
+                    </div>
+                    <div class="about-card d-flex shadowed flex-column">
+                        <div class="about-img about-img3" style="background-image: url('img/medal.svg');"></div>
+                        <div class="sutitle2 text-center">Цена/качество</div>
+                        <div class="content">Folly words widow one downs few age every seven. If miss part by fact he park just shew. Discovered had get considered projection who favourable. Necessary up knowledge it tolerably. </div>
+                    </div>
+                    <div class="about-card d-flex shadowed flex-column">
+                        <div class="about-img about-img4" style="background-image: url('img/astronaut.svg');"></div>
+                        <div class="sutitle2 text-center">Супер учителя</div>
+                        <div class="content">Folly words widow one downs few age every seven. If miss part by fact he park just shew. Discovered had get considered projection who favourable. Necessary up knowledge it tolerably. </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="call-request-panel d-flex col-10 offset-1 pt-5">
+                <div class="call-request-card d-flex col-12 shadowed align-items-center ">
+                    <div class="call-request-text d-flex flex-column col-7">
+                        <div class="small-title d-flex">
+                            <div>ЗАКАЗАТЬ ЗВОНОК</div>
+                        </div>
+                        <div class="sutitle3">
+                            Отправтье заявку и с Вами свяжутся в ближайшее время!
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-outline-dark btn-round" onclick="showapplyform()">Заказать</button>
+                        </div>
+                    </div>
+                    <div class="call-request-img" style="background-image: url('img/call-center.svg');">
+                    </div>
+                </div>
+            </div>
+
+            <div id="price-panel" class="price-panel d-flex col-10 offset-1 pt-5 flex-column">
+                <div class="title text-center">Тарифы обучения</div>
+                <div class="price-cards d-flex">
+                    <div class="price-card d-flex shadowed flex-column justify-content-center">
+                        <div class="price-img price-img1" style="background-image: url('img/team.svg');"></div>
+                        <div class="price-text d-flex flex-column justify-content-center p-2 px-4">
+                            <div class="d-flex">
+                                <div class="price-title">@ViewBag.Offers[0].Title</div>
+                                <div class="price-amount">₴@ViewBag.Offers[0].Price</div>
+                            </div>
+                            <div class="content">@ViewBag.Offers[0].Description</div>
+                            <div class="d-flex flex-row-reverse">
+                                <button type="button" class="btn btn-outline-dark btn-round" onclick="showapplyformById('@ViewBag.Offers[0].Id')">Записаться</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-card d-flex shadowed flex-column justify-content-center">
+                        <div class="price-img price-img2" style="background-image: url('img/student.svg');"></div>
+                        <div class="price-text d-flex flex-column justify-content-center p-2 px-4">
+                            <div class="d-flex">
+                                <div class="price-title">@ViewBag.Offers[1].Title</div>
+                                <div class="price-amount">₴@ViewBag.Offers[1].Price</div>
+                            </div>
+                            <div class="content">@ViewBag.Offers[1].Description</div>
+                            <div class="d-flex flex-row-reverse">
+                                <button type="button" class="btn btn-outline-dark btn-round" onclick="showapplyformById('@ViewBag.Offers[1].Id')">Записаться</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="contact-panel" class="contact-panel d-flex col-10 offset-1 pt-5">
+                <div class="contact-container d-flex flex-column col-12 shadowed ">
+                    <div class="contact-header d-flex justify-content-center align-items-center">
+                        <div class="small-title d-flex align-items-center">
+                            <div>НАШИ КОНТАКТЫ</div>
+                        </div>
+                    </div>
+                    <div class="contact-cards d-flex flex-column">
+                        <div class="contact-cards-row d-flex">
+                            <div class="contact-card contact-card1 d-flex align-items-center">
+                                <div class="contact-img contact-img1 col-5" style="background-image: url('img/phone-book.svg');">
+                                </div>
+                                <div class="contact-text sutitle2 col-7">
+                                    +380954854549<br>
+                                    +380954854549
+                                </div>
+                            </div>
+                            <div class="contact-card contact-card2 d-flex align-items-center" onclick="location.href='http://instagram.com/englishgo_zv'">
+                                <div class="contact-img contact-img2 col-5" style="background-image: url('img/instagram.svg');">
+                                </div>
+                                <div class="contact-text sutitle2 col-7">
+                                    Instagram
+                                </div>
+                            </div>
+                            <div class="contact-card contact-card3 d-flex align-items-center" onclick="location.href='http://facebook.com/englishgo_zv'">
+                                <div class="contact-img contact-img3 col-5" style="background-image: url('img/facebook.svg');">
+                                </div>
+                                <div class="contact-text sutitle2 col-7">
+                                    Facebook
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-cards-row d-flex">
+                            <div class="contact-card contact-card4 d-flex align-items-center">
+                                <div class="contact-img contact-img4 col-5" style="background-image: url('img/telegram.svg');">
+                                </div>
+                                <div class="contact-text sutitle2 col-7">
+                                    Telegram
+                                </div>
+                            </div>
+                            <div class="contact-card contact-card5 d-flex align-items-center">
+                                <div class="contact-img contact-img5 col-5" style="background-image: url('img/viber.svg');">
+                                </div>
+                                <div class="contact-text sutitle2 col-7">
+                                    Viber
+                                </div>
+                            </div>
+                            <div class="contact-card contact-card6 d-flex align-items-center">
+                                <div class="contact-img contact-img6 col-5" style="background-image: url('img/email.svg');">
+                                </div>
+                                <div class="contact-text d-flex flex-column col-7">
+                                    <div class="sutitle2">Email</div>
+                                    <div class="sutitle3" style="padding-top: 10px;">englsighgo@ukr.net</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="location-panel" class="price-panel d-flex col-10 offset-1 pt-5">
+            <div class="d-flex flex-column">
+                <div class="title">Как</div>
+                <div class="title">нас</div>
+                <div class="title">найти?</div>
+            </div>
+            <div class="location-card d-flex shadowed flex-column justify-content-center">
+                <div class="location-map">
+                    <iframe width="745" height="315" id="gmap_canvas" src="https://maps.google.com/maps?q=%D0%A8%D0%BA%D0%BE%D0%BB%D0%B0%20%D0%B0%D0%BD%D0%B3%D0%BB%D1%96%D0%B9%D1%81%D1%8C%D0%BA%D0%BE%D1%97%20%D0%BC%D0%BE%D0%B2%D0%B8%20EnglishGo&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                </div>
+                <div class="location-text d-flex justify-content-center p-2 px-4">
+                    <div class="location-img" style="background-image: url('img/map.svg');"></div>
+                    <div class="d-flex flex-column">
+                        <div class="location-title" style="padding-top: 20px;">ул. Европейская, дом 5</div>
+                        <div class="sutitle3" style="padding-top: 20px;">"Школа английского языка EnglishGo"</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="apply-panel" class="apply-panel d-flex col-10 offset-1 pt-5">
+            <div class="apply-container d-flex flex-column col-12 shadowed ">
+                <div class="apply-header d-flex justify-content-center align-items-center">
+                    <div class="small-title d-flex align-items-center">
+                        <div>ПОДАТЬ ЗАЯВКУ</div>
+                    </div>
+                </div>
+
+                <form method="post" asp-antiforgery="true" asp-action="Index" asp-controller="Home">
+                    <div class="validation" asp-validation-summary="ModelOnly"></div>
+                    <div class="apply-form d-flex">
+                        <div class="apply-form-card d-flex flex-column col-4">
+                            <div class="form-group">
+                                <label asp-for="Name"></label>
+                                <input class="form-control" type="text" name="Name" asp-for="Name" placeholder="Имя" />
+                                <span asp-validation-for="Name"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Phone"></label>
+                                <input class="form-control" type="tel" name="Phone" asp-for="Phone" placeholder="+380" />
+                                <span asp-validation-for="Phone"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Email"></label>
+                                <input class="form-control" type="email" name="Email" asp-for="Email" placeholder="Email" />
+                                <span asp-validation-for="Email"></span>
+                            </div>
+                        </div>
+                        <div class="apply-form-card d-flex flex-column col-4">
+                            <div class="form-group">
+                                <label>Вас интересует</label>
+                                <select id="lessonType" class="form-control form-control" name="OfferId">
+                                    <option value="@ViewBag.Offers[0].Id">@ViewBag.Offers[0].Title</option>
+                                    <option value="@ViewBag.Offers[1].Id">@ViewBag.Offers[1].Title</option>
+                                    <option value="">Хочу больше информации</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Вопрос</label>
+                                <textarea class="form-control" rows="5" name="Question"></textarea>
+                            </div>
+                            <div class="d-flex flex-row-reverse">
+                                <input type="submit" class="btn btn-dark btn-round" value="Отправить заявку" />
+                            </div>
+
+                        </div>
+                        <div class="apply-img col-4" style="background-image: url('img/student2.svg');">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="pt-4 d-flex justify-content-center">
+            <button type="button" class="btn btn-outline-danger btn-round" onclick="location.href = '#'">Вверх</button>
+        </div>
+
+        <footer class="text-center">
+            <hr />© EnglishGo | @DateTime.Now.Year.ToString()
+        </footer>
+    </div>
+    <script src="~/js/site.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <script type="text/javascript">
+        var showabout = function () {
+            var anchorPos = $('#about-panel').offset();
+            this.scroll(0, anchorPos.top);
+        }
+
+        var showprices = function () {
+            var anchorPos = $('#price-panel').offset();
+            this.scroll(0, anchorPos.top);
+        }
+
+        var showcontacts = function () {
+            var anchorPos = $('#contact-panel').offset();
+            this.scroll(0, anchorPos.top - 30);
+        }
+
+        var showapplyform = function () {
+            var anchorPos = $('#apply-panel').offset();
+            this.scroll(0, anchorPos.top - 30);
+        }
+
+        var showapplyformById = function (lessonType) {
+            var anchorPos = $('#apply-panel').offset();
+            this.scroll(0, anchorPos.top - 30);
+            var lessonTypeSelect = $('#lessonType');
+            lessonTypeSelect.val(lessonType);
+        }
+
+        var checkModel = function() {
+            @if(Model != null)
+            {
+                @:showapplyformById(@(Model.OfferId ?? ViewBag.Offers.Count ));
+            }
+        }
+    </script>
+</body>
+</html>
