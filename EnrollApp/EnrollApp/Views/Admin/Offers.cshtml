@@ -1,0 +1,25 @@
+﻿@model IEnumerable<EnrollApp.Models.Offer>
+
+@{
+    ViewData["Title"] = "Услуги";
+}
+
+<h1>Услуги</h1>
+<br />
+<table class="table table-dark table-striped">
+    <thead>
+    <tr>
+        <th>Название</th>
+        <th>Описание</th>
+        <th>Стоимость услуги</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var request in Model)
+    {
+        <td>@request.Title</td>
+        <td>@request.Description</td>
+        <td>@request.Price</td>
+    }
+    </tbody>
+</table>

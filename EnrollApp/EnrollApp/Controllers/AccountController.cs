@@ -72,7 +72,7 @@ namespace EnrollApp.Controllers
                     }
                     else
                     {
-                        return Content("You are on Admin page");
+                        return RedirectToAction("Index", "Admin");
                     }
                 }
                 else
