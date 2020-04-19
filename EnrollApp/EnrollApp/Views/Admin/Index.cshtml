@@ -1,5 +1,4 @@
-﻿
-@model EnrollApp.ViewModels.AllRequestsViewModel
+﻿@model EnrollApp.ViewModels.AllRequestsViewModel
 
 @{
     ViewData["Title"] = "Запросы клиентов";
@@ -8,28 +7,38 @@
 <h1>Запросы клиентов</h1>
 <form method="get">
     <label class="col-form-label">Тип запроса: </label>
-    <select id="requestStateFilter" name="requestState" asp-items="Model.ClientRequestStates" class="form-control"></select>
-
+    <select id="requestStateFilter" name="requestState" asp-items="Model.ClientRequestStates"
+            class="form-control form-control-sm"></select>
     <label class="col-form-label">Тема: </label>
-    <select id="offerFilter" name="offer" asp-items="Model.Offers" class="form-control" ></select>
-    <input type="submit" value="Применить фильтр"/>
+    <select id="offerFilter" name="offer" asp-items="Model.Offers"
+            class="form-control form-control-sm"></select><br/>
+    <input type="submit" class="btn btn-primary" value="Применить фильтр" />
 </form>
 <br/>
 <table class="table table-dark table-striped">
     <thead>
     <tr>
-        <th>Имя</th><th>Телефон</th><th>Email</th><th>Тема</th><th>Вопрос</th><th>Статус</th>
+        <th>Id</th><th>Имя</th><th>Телефон</th><th>Email</th><th>Тема</th><th>Вопрос</th><th>Статус</th><th></th>
     </tr>
     </thead>
     <tbody>
         @foreach(var request in Model.ClientRequests)
         {
-            <td>@request.Client.Name</td>
-            <td>@request.Client.Phone</td>
-            <td>@request.Client.Email</td>
-            <td>@(request.Offer?.Title ?? "-")</td>
-            <td>@request.Question</td>
-            <td>@request.ClientRequestState.Title</td>
+            <tr>
+                <td>@request.Id</td>
+                <td>@request.Client.Name</td>
+                <td>@request.Client.Phone</td>
+                <td>@request.Client.Email</td>
+                <td>@(request.Offer?.Title ?? "-")</td>
+                <td>@request.Question</td>
+                <td>@request.ClientRequestState.Title</td>
+                <td>
+                    <form method="get" asp-controller="Admin" asp-action="EditRequest" asp-route-id="@request.Id">
+                        <input class="btn btn-primary" type="submit" value="Изменить статус"/>
+                    </form>
+                </td>
+
+            </tr>
         }
     </tbody>
 </table>

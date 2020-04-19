@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
 namespace EnrollApp
 {
@@ -30,6 +31,9 @@ namespace EnrollApp
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
+
+            //Enable changes of View during debugging
+            services.AddRazorPages().AddRazorRuntimeCompilation();
 
             services.AddControllersWithViews();
         }

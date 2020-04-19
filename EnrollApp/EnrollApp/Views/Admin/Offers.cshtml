@@ -17,9 +17,11 @@
     <tbody>
     @foreach (var request in Model)
     {
-        <td>@request.Title</td>
-        <td>@request.Description</td>
-        <td>@request.Price</td>
+        <tr>
+            <td>@request.Title</td>
+            <td>@request.Description</td>
+            <td>@request.Price</td>
+        </tr>
     }
     </tbody>
 </table>

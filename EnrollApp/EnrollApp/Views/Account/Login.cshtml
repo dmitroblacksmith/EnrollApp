@@ -1,24 +1,23 @@
 ﻿@model EnrollApp.ViewModels.LoginViewModel
 
 <h2>Вход в приложение</h2>
-<form method="post" asp-controller="Account" asp-action="Login"
-      asp-route-returnUrl="@Model.ReturnUrl">
+<form method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
     <div asp-validation-summary="ModelOnly"></div>
     <div>
-        <label asp-for="Email"></label><br />
-        <input asp-for="Email" />
+        <label asp-for="Email" class="col-form-label"></label><br />
+        <input asp-for="Email" class="form-control"/>
         <span asp-validation-for="Email"></span>
     </div>
     <div>
-        <label asp-for="Password"></label><br />
-        <input asp-for="Password" />
+        <label asp-for="Password" class="col-form-label"></label><br />
+        <input asp-for="Password" class="form-control"/>
         <span asp-validation-for="Password"></span>
     </div>
     <div>
-        <label asp-for="RememberMe"></label><br />
-        <input asp-for="RememberMe" />
+        <label asp-for="RememberMe" class="col-form-label"></label><br />
+        <input asp-for="RememberMe" class="form-control"/>
     </div>
     <div>
-        <input type="submit" value="Войти" />
+        <input type="submit" value="Войти" class="btn btn-primary"/>
     </div>
 </form>

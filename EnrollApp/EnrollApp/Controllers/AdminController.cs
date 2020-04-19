@@ -58,5 +58,36 @@ namespace EnrollApp.Controllers
             return View(offers);
         }
 
+        [HttpGet]
+        public IActionResult EditRequest(int id)
+        {
+            ClientRequest clientRequest = _context.ClientRequests.Find(id);
+            
+            if (clientRequest == null)
+            {
+                return NotFound();
+            }
+
+            _context.Entry(clientRequest).Reference(cr => cr.Offer).Load();
+            _context.Entry(clientRequest).Reference(cr => cr.Client).Load();
+
+            List<ClientRequestState> clientRequestStates = _context.ClientRequestStates.ToList();
+
+            EditRequestViewModel editRequestVM = new EditRequestViewModel()
+            {
+                ClientRequest = clientRequest,
+                RequestStates = new SelectList(clientRequestStates, "Id", "Title")
+            };
+
+            return View(editRequestVM);
+        }
+
+        [HttpPost]
+        public IActionResult EditRequest(ClientRequest clientRequest)
+        {
+            _context.ClientRequests.Update(clientRequest);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Admin");
+        }
     }
 }
