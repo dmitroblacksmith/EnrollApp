@@ -89,5 +89,57 @@ namespace EnrollApp.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index", "Admin");
         }
+
+        [HttpGet]
+        public IActionResult CreateOffer()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateOffer(Offer offer)
+        {
+            if (offer == null)
+                return NotFound();
+            _context.Offers.Add(offer);
+            _context.SaveChanges();
+            return RedirectToAction("Offers", "Admin");
+        }
+
+        [HttpGet]
+        public IActionResult EditOffer(int id)
+        {
+            var offer = _context.Offers.Find(id);
+            if (offer == null)
+                return NotFound();
+            return View(offer);
+        }
+
+        [HttpPost]
+        public IActionResult EditOffer(Offer offer)
+        {
+            _context.Offers.Update(offer);
+            _context.SaveChanges();
+            return RedirectToAction("Offers", "Admin");
+        }
+
+        [HttpGet]
+        [ActionName("DeleteOffer")]
+        public IActionResult Delete(int id)
+        {
+            var offer = _context.Offers.Find(id);
+            if (offer == null)
+                return NotFound();
+            return View(offer);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteOffer(int id)
+        {
+            var offer = _context.Offers.Find(id);
+            _context.Offers.Remove(offer);
+            _context.SaveChanges();
+            return RedirectToAction("Offers", "Admin");
+        }
     }
 }

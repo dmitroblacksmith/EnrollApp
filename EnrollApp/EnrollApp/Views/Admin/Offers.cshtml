@@ -6,21 +6,38 @@
 
 <h1>Услуги</h1>
 <br />
+<form method="get">
+    <input type="submit" value="Новая услуга" asp-controller="Admin" asp-action="CreateOffer" class="btn btn-primary"/>
+</form>
+<br/>
 <table class="table table-dark table-striped">
     <thead>
-    <tr>
-        <th>Название</th>
-        <th>Описание</th>
-        <th>Стоимость услуги</th>
-    </tr>
+        <tr>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Стоимость услуги</th>
+            <th></th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var request in Model)
+    @foreach (var offer in Model)
     {
         <tr>
-            <td>@request.Title</td>
-            <td>@request.Description</td>
-            <td>@request.Price</td>
+            <td>@offer.Title</td>
+            <td>@offer.Description</td>
+            <td>@offer.Price</td>
+            <td>
+                <form method="get">
+                    <input type="submit" asp-controller="Admin" asp-action="EditOffer" 
+                           asp-route-id="@offer.Id" value="Изменить" class="btn btn-primary" />
+                </form>
+            </td>
+            <td>
+                <form method="get">
+                    <input type="submit"  asp-action="DeleteOffer" asp-controller="Admin"
+                           asp-route-id="@offer.Id" value="Удалить" class="btn btn-primary" />
+                </form></td>
         </tr>
     }
     </tbody>
